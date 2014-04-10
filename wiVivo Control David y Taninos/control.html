@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>wiVivo DavyTan Control</title>
+    <meta charset="utf-8" />
+    <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="styles/kendo.mobile.wiVivoControlDavyTan1.css" rel="stylesheet" />
+    <link href="styles/wiVivoControl.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="scripts/wiVivoControl.js"></script>
+    <script src="cordova.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/kendo.mobile.min.js"></script>
+    <script src="scripts/app.js"></script>
+</head>
+<body>
+    <!--Home-->
+    <div id="tabstrip-lar" data-role="view" data-title="comandos">
+        <div class="view-content">
+            <font color="black">
+            <h2>COMANDOS</h2>
+            <table width=100%>
+                <tr>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="activaLoto()">
+                        <h3><br/>::::::::::::::<br/></h3><h1>loteria ON</h1><h3><br/>::::::::::::::<br/></h3></button></td>
+                    <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="desactivaLoto()">
+                        <h3><br/>::::::::::::::<br/></h3><h1>loteria OFF</h1><h3><br/>::::::::::::::<br/></h3></button></td>
+                </tr><tr>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="activaAplauso()">
+                        <h3><br/>::::::::::::::<br/></h3><h1>aplauso ON</h1><h3><br/>::::::::::::::<br/></h3></button></td>
+                    <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="desactivaAplauso()">
+                        <h3><br/>::::::::::::::<br/></h3><h1>aplauso ON</h1><h3><br/>::::::::::::::<br/></h3></button></td>
+                </tr>
+            </table>
+            <!--<h4>Activa/Desactiva "Pedo"</h4>
+            <table width=100%>
+                <tr>
+                    <td><button class="boton-amarillo boton-centro boton-text-all-color" type="button" onclick=activaPedo()><h3>-------</h3><h1>pedo ON</h1><h3>-------</h3></button></td>
+                    <td><button class="boton-amarillo boton-centro boton-text-all-color" type="button" onclick=desactivaPedo()><h3>-------</h3><h1>pedo OFF</h1><h3>-------</h3></button></td>
+                </tr>
+            </table>
+            <h4>APLAUSO</h4>
+            <table width=100%>
+                <tr>
+                    <td><button class="boton-morado boton-centro boton-text-all-color" type="button" onclick=activaAplauso()><h3>-------</h3><h1>aplauso ON</h1><h3>-------</h3></button></td>
+                    <td><button class="boton-morado boton-centro boton-text-all-color" type="button" onclick=desactivaAplauso()><h3>-------</h3><h1>aplauso OFF</h1><h3>-------</h3></button></td>
+                </tr>
+            </table>-->
+        	</font>
+        </div>
+        <font color="black"><div data-role="view"><p>&copy; <span data-bind="text: getYear"></span> aerowi 2014</p></div></font>
+	</div>
+
+    <div id="tabstrip-selfie" data-role="view" data-title="selfie">
+        <div class="view-content">
+		<!--Saca foto y la sube al servidor-->
+	        <font color="black">
+            <h2>SELFIE</h2>
+    		<p><button class="boton-negro boton-centro boton-text-all-color" onclick="captureImage()">
+        	    <h3><br/>::::::::::::::<br/></h3><h1>Momento Selfie</h1><h3><br/>::::::::::::::<br/></h3></button></p>
+        	<div id="rutafoto"></div>
+        	<div id="rutasubida"></div>
+    		<img style="display:none;margin:10px auto; width:80%;" id="smallImage" src="" />
+        	</font>
+        </div>  
+    <font color="black"><div data-role="view"><p>&copy; <span data-bind="text: getYear"></span> aerowi 2014</p></div></font>
+    </div>
+
+    <div id="tabstrip-colorines" data-role="view" data-title="colorines">
+        <div class="view-content">
+            <font color="black">
+    		<!--<h1>Controla el color de sus pantallas</h1>-->
+            <h2>COLOR 1</h2>
+            <table width=100%>
+                <tr>
+                    <td><button class="boton-naranja boton-centro boton-text-all-color" type="button" onclick="ponColor1Naranja()">
+                        	<h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-amarillo boton-centro boton-text-all-color" type="button" onclick="ponColor1Amarillo()">
+                        	<h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-verde boton-centro boton-text-all-color" type="button" onclick="ponColor1Verde()">
+                        	<h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                </tr>
+                <tr>
+                    <td><button class="boton-morado boton-centro boton-text-all-color" type="button" onclick="ponColor1Fucsia()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="ponColor1Negro()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="ponColor1Blanco()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                </tr>
+            </table>
+            <h2>COLOR 2</h2>
+            <table width=100%>
+                <tr>
+                    <td><button class="boton-naranja boton-centro boton-text-all-color" type="button" onclick="ponColor2Naranja()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-amarillo boton-centro boton-text-all-color" type="button" onclick="ponColor2Amarillo()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-verde boton-centro boton-text-all-color" type="button" onclick="ponColor2Verde()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                </tr>
+                <tr>
+                    <td><button class="boton-morado boton-centro boton-text-all-color" type="button" onclick="ponColor2Fucsia()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="ponColor2Negro()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                    <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="ponColor2Blanco()">
+                        <h3><br/>::::::::::::::<br/>::::::::::::::<br/>::::::::::::::<br/><br/></h3></button></td>
+                </tr>
+            </table>
+            <!--<h4>Controla intermitencia de sus pantallas</h4>-->
+            <h2>INTERMITENCIA</h2>
+            <table width=100%>
+                <tr>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="intermitenciaNula()">
+                        <br/><h1> 0 </h1><br/></button></td>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="intermitenciaBaja()">
+                        <br/><h1> > </h1><br/></button></td>
+                    <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="intermitenciaAlta()">
+                        <br/><h1>> ></h1><br/></button></td>
+                </tr>
+            </table>
+            </font>
+        </div>  
+    <font color="black"><div data-role="view"><p>&copy; <span data-bind="text: getYear"></span> aerowi 2014</p></div></font>
+    </div>
+
+    <!--Layout-->
+    <div data-role="layout" data-id="tabstrip-layout">
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-lar" data-icon="action">Comandos</a>
+                <a href="#tabstrip-selfie" data-icon="camera">Selfie</a>
+                <a href="#tabstrip-colorines" data-icon="featured">Colorines</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
