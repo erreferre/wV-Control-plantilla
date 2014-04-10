@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>wiVivo DavyTan Control</title>
+    <title>wiVivo Control David y Taninos</title>
     <meta charset="utf-8" />
     <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/kendo.mobile.wiVivoControlDavyTan1.css" rel="stylesheet" />
@@ -13,15 +13,39 @@
     <script src="scripts/kendo.mobile.min.js"></script>
     <script src="scripts/app.js"></script>
 </head>
-<body>
-<!--Home-->
-	<div data-role="view">
-        <font color="black"><h1>CONTROLADOR</h1><h1>David Amor & Taninos Maduros Jazz Band</h1></font>
-        <h2 width="100%" class="boton-negro boton-centro boton-text-all-color">
-        app para controlar wiVivo DavyTan. NECESITAS USUARIO CON PERMISOS para acceder.</h2>
+<body onload="init()">
+<div id="loginPage" data-role="view-content">
+    <div class="view-content">
+		<font color="black"><h1>CONTROLADOR</h1><h1>wiVivo David Amor y Taninos Maduros Jazz Band</h1></font>
+    	<button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>
+        app para controlar wiVivo DavyTan. NECESITAS USUARIO CON PERMISOS para acceder.</h2></button>
+        <table width=100%>
+	        <td><form id="loginForm">
+    		    <div data-role="fieldcontain" class="ui-hide-label">
+            		<label for="username">usuario:</label>
+            		<input type="text" name="username" id="username" value="" placeholder="usuario" />
+        		</div>
+        		<div data-role="fieldcontain" class="ui-hide-label">
+            		<label for="password">contrasinal:</label>
+            		<input type="password" name="password" id="password" value="" placeholder="contrasinal" />
+        		</div>
+                <button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>
+        		<input type="submit" value="Login" id="submitButton"></h2></button>
+        	</form></td>
+        </table>
+    </div>
+    <div data-role="footer">
+	    <font color="black"><div data-role="view"><p>&copy; aerowi.es 2014</p></div></font>
+    </div>
+</div>
+<script>
+$("#loginPage").live("pageinit", function(e) {
+        checkPreAuth();
+    });
+</script>
+<!--    <div data-role="view">
         <p><button id="comezaShow" width="100%" class="boton-negro boton-centro boton-text-all-color" onclick="location.href='control.html'">
            <h1><br/>::::::::::::::::::::<br/>login<br/>directo<br/>(provisional)<br/>::::::::::::::::::::<br/><br/></h1></button></p>
-    </div>
-    <font color="black"><div data-role="view"><p>&copy; <span data-bind="text: getYear"></span> aerowi 2014</p></div></font>
+    </div>-->
 </body>
 </html>
