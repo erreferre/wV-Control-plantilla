@@ -1,12 +1,24 @@
-function init() {
-document.addEventListener("deviceready", deviceReady, true);
-delete init;
-}
+//function init() {
+document.addEventListener("deviceready", onDeviceReady, true);
+//delete init;
+//}
 
+//variables Globales
+//var servidor_wivivo_login = 'http://srv001.liveshowsync.local';
+var servidor_wivivo_login = 'http://192.168.10.155';
+var webservice_wivivo_login = servidor_wivivo_login + '/liveshowsync/'; 
+var servidor_login = webservice_wivivo_login + 'login.php';
+
+function onDeviceReady() {
+    $("#loginForm").on("submit",handleLogin);
+    //PONER menubutton CUANDO SEA LA VERSION RELEASE
+    document.addEventListener("menubutton", exitAppPopup, false);
+    document.addEventListener("backbutton", exitAppPopup, false);
+}
 
 function checkPreAuth() {
     var form = $("#loginForm");
-    if(window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
+    if(window.localStorage["username"] !== undefined && window.localStorage["password"] !== undefined) {
         $("#username", form).val(window.localStorage["username"]);
         $("#password", form).val(window.localStorage["password"]);
         handleLogin();
@@ -14,34 +26,54 @@ function checkPreAuth() {
 }
 
 function handleLogin() {
-    var form = $("#loginForm");    
+    var form = $("#loginForm");   
     //disable the button so we can't resubmit while we wait
     $("#submitButton",form).attr("disabled","disabled");
     var u = $("#username", form).val();
     var p = $("#password", form).val();
-    console.log("click");
-    if(u != '' && p!= '') {
-        $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", {username:u,password:p}, function(res) {
-            if(res == true) {
-                //store
+    if(u !== '' && p!== '') {
+        $.get(servidor_login, {username:u,password:p})
+    	.done(function(data){
+		    navigator.notification.alert("resultado: "+data+"||");
+            if (data === true){
                 window.localStorage["username"] = u;
-                window.localStorage["password"] = p;             
-                $.mobile.changePage("some.html");
-            } else {
-                navigator.notification.alert("Your login failed", function() {});
-            }
-         $("#submitButton").removeAttr("disabled");
-        },"json");
+            	window.localStorage["password"] = p;             
+            	window.location.href = "control.html";
+            } else navigator.notification.alert("usuario ou contrasinal incorrectos", function() {});
+        })
+    	.fail(function(){
+            navigator.notification.alert("Tes que estar conectado o espectáculo...",function() {},"ERROR DE COMUNICACION","OK");
+        });
+//        $.post(servidor_login, {username:u,password:p}, function(res) {
+	//    	console.log(res);
+      //      if(res === true) {
+                //store
+        //        window.localStorage["username"] = u;
+          //      window.localStorage["password"] = p;             
+           //     window.location.href = "control.html";
+            //} else {
+              //  navigator.notification.alert("usuario ou contrasinal incorrectos", function() {});
+            //}
+        $("#submitButton").removeAttr("disabled");
+        //});
     } else {
-        //Thanks Igor!
-        navigator.notification.alert("You must enter a username and password", function() {});
+        navigator.notification.alert("debes introducir usuario e contrasinal", function() {});
         $("#submitButton").removeAttr("disabled");
     }
     return false;
 }
 
-function deviceReady() {
-    
-$("#loginForm").on("submit",handleLogin);
-
+function exitAppPopup() {
+    navigator.notification.confirm(
+        'visita www.aerowi.es se queres saber como fixemos esta app'
+        , function(button) {
+              if (button === 2) {
+                  window.plugins.powerManagement.release();
+                  navigator.app.exitApp();
+              } 
+          }
+        , '¿Sair do Show?'
+        , 'Pois non, Pois si'
+    );  
+    return false;
 }
