@@ -62,193 +62,102 @@ function falloConexion(){
 //COLORES
 function ponColor1Amarillo(){
     $.get(servidor_color1, {color:"ffcc00"})
-    	.done(function(){
-        	alertaColor('AMARILLO',1);
-        })
-    	.fail(function(){
-            falloConexion();
-		});
+    	.done(function(){    	alertaColor('AMARILLO',1);        })
+    	.fail(function(){            falloConexion();		});
 }
-
 function ponColor1Azul(){
     $.get(servidor_color1, {color:"00ffff"})
-    	.done(function(){
-    		alertaColor('AZUL',1);
-        })
-    	.fail(function(){
-            falloConexion();
-        });
+    	.done(function(){    		alertaColor('AZUL',1);        })
+    	.fail(function(){            falloConexion();        });
 }
-
 function ponColor1Fucsia(){
     $.get(servidor_color1, {color:"8e149a"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado FUCSIA","COLOR1","COLOR1");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){		    alertaColor('FUCSIA',1);        })
+    	.fail(function(){            falloConexion();        });
 }
-
 function ponColor1Naranja(){
     $.get(servidor_color1, {color:"f77331"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado NARANJA","COLOR1","COLOR1");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){		    alertaColor('NARANJA',1);        })
+    	.fail(function(){            falloConexion();        });
 }
-
 function ponColor1Rojo(){
     $.get(servidor_color1, {color:"ff0000"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado ROJO","COLOR1","COLOR1");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){		    alertaColor('ROJO',1);        })
+    	.fail(function(){            falloConexion();        });
 }
-
 function ponColor1Verde(){
     $.get(servidor_color1, {color:"40ff00"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado VERDE","COLOR1","COLOR1");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){		    alertaColor('VERDE',1);        })
+    	.fail(function(){            falloConexion();        });
 }
-
 function ponColor1Blanco(){
     $.get(servidor_color1, {color:"ffffff"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado BLANCO","COLOR1","COLOR1");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){	    alertaColor('BLANCO',1);        })
+    	.fail(function(){           falloConexion();        });
 }
-
 function ponColor1Negro(){
     $.get(servidor_color1, {color:"000000"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado NEGRO","COLOR1","COLOR1");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){	    alertaColor('NEGRO',1);        })
+    	.fail(function(){		falloConexion();        });
 }
-
 function ponColor2Amarillo(){
     $.get(servidor_color2, {color:"ffcc00"})
-    	.done(function(){
-		    alertaColor('AMARILLO',2);
-        })
-    	.fail(function(){
-            falloConexion();
-        });
+    	.done(function(){    alertaColor('AMARILLO',2);        })
+    	.fail(function(){    falloConexion();        });
 }
-
 function ponColor2Azul(){
     $.get(servidor_color2, {color:"00ffff"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado AZUL","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaColor('AZUL',2);        })
+    	.fail(function(){falloConexion();        });
 }
-
 function ponColor2Fucsia(){
     $.get(servidor_color2, {color:"8e149a"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado FUCSIA","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaColor('FUCSIA',2);        })
+    	.fail(function(){falloConexion();        });
 }
-
 function ponColor2Naranja(){
     $.get(servidor_color2, {color:"f77331"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado NARANJA","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaColor('NARANJA',2);        })
+    	.fail(function(){falloConexion();        });
 }
-
 function ponColor2Rojo(){
     $.get(servidor_color2, {color:"ff0000"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado ROJO","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){   alertaColor('ROJO',2);        })
+    	.fail(function(){falloConexion();        });
 }
-
 function ponColor2Verde(){
     $.get(servidor_color2, {color:"40ff00"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado VERDE","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaColor('VERDE',2);        })
+    	.fail(function(){falloConexion();        });
 }
-
 function ponColor2Blanco(){
     $.get(servidor_color2, {color:"ffffff"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado BLANCO","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaColor('BLANCO',2);      })
+    	.fail(function(){falloConexion();    });
 }
-
 function ponColor2Negro(){
     $.get(servidor_color2, {color:"000000"})
-    	.done(function(){
-		    navigator.notification.alert("seleccionado NEGRO","COLOR2","COLOR2");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaColor('NEGRO',2);})
+    	.fail(function(){falloConexion();});
 }
 
 //INTERMITENCIA
 function intermitenciaNula(){
     $.get(servidor_intermitencia, {intermitencia:"0"})
-    	.done(function(){
-		    alertaComando("NULA","INTERMITENCIA");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
+    	.done(function(){alertaComando("NULA","INTERMITENCIA");})
+    	.fail(function(){falloConexion();});
 }
 
 function intermitenciaBaja(){
     $.get(servidor_intermitencia, {intermitencia:"1"})
-    	.done(function(){
-		    alertaComando("BAJA","INTERMITENCIA");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaComando("BAJA","INTERMITENCIA");})
+    	.fail(function(){falloConexion();});
 }
 
 function intermitenciaAlta(){
     $.get(servidor_intermitencia, {intermitencia:"2"})
-    	.done(function(){
-		    alertaComando("ALTA","INTERMITENCIA");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaComando("ALTA","INTERMITENCIA");})
+    	.fail(function(){falloConexion();});
 }
 
 //COMANDOS
@@ -274,12 +183,8 @@ function activaShow(){
 }
 function showEmpezado(){
     $.get(servidor_activa_showempezado)
-    	.done(function(){
-		    alertaComando("non hai marcha atrás...","SHOW");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
+    	.done(function(){alertaComando("non hai marcha atrás...","SHOW");})
+    	.fail(function(){falloConexion();});
 }
 function desactivaShow(){
     $.get(servidor_desactiva_show)
@@ -287,31 +192,21 @@ function desactivaShow(){
 		    alertaComando("SHOW PARADO!!","SHOW");
             desactivaShowEmpezado();
         })
-    	.fail(function(){
-            falloConexion();
-        });
+    	.fail(function(){falloConexion();});
 }
 
 //LOTO
 function activaLoto(){
     $.get(servidor_activa_loto)
-    	.done(function(){
-		    alertaComando("ACTIVADA","LOTO");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaComando("ACTIVADA","LOTO");})
+    	.fail(function(){falloConexion();});
     setTimeout(desactivaLoto,300000);
 }
 
 function desactivaLoto(){
     $.get(servidor_desact_loto)
-    	.done(function(){
-		    navigator.notification.alert("DESACTIVADA",function(){},"LOTO","OK");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaComando("DESACTIVADA","LOTO");})
+    	.fail(function(){falloConexion();});
 }
 
 //function activaPedo(){
@@ -324,23 +219,15 @@ function desactivaLoto(){
 
 function activaAplauso(){
     $.get(servidor_activa_aplauso)
-    	.done(function(){
-		    navigator.notification.alert("ACTIVADO",function(){},"APLAUSO","OK");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaComando("ACTIVADO","APLAUSO");})
+    	.fail(function(){falloConexion();});
     setTimeout(desactivaAplauso,60000);
 }
 
 function desactivaAplauso(){
     $.get(servidor_desact_aplauso)
-    	.done(function(){
-		    navigator.notification.alert("DESACTIVADO",function(){},"APLAUSO","OK");
-        })
-    	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
-        });
+    	.done(function(){alertaComando("DESACTIVADO","APLAUSO");  })
+    	.fail(function(){falloConexion();  });
 }
 
 //ADMIN
