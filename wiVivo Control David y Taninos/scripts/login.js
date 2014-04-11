@@ -35,14 +35,14 @@ function handleLogin() {
         $.get(servidor_login, {username:u,password:p})
     	.done(function(data){
 		    navigator.notification.alert("resultado: "+data+"||");
-            if (data === true){
+            if (data === 'true'){
                 window.localStorage["username"] = u;
             	window.localStorage["password"] = p;             
             	window.location.href = "control.html";
-            } else navigator.notification.alert("usuario ou contrasinal incorrectos", function() {});
+            } else navigator.notification.alert("usuario ou contrasinal incorrectos", function() {}, "ERRO DE AUTENTICACIÓN","OK");
         })
     	.fail(function(){
-            navigator.notification.alert("Tes que estar conectado o espectáculo...",function() {},"ERROR DE COMUNICACION","OK");
+            navigator.notification.alert("tes que estar conectado o espectáculo...",function() {},"ERRO DE COMUNICACIÓN","OK");
         });
 //        $.post(servidor_login, {username:u,password:p}, function(res) {
 	//    	console.log(res);
@@ -57,7 +57,7 @@ function handleLogin() {
         $("#submitButton").removeAttr("disabled");
         //});
     } else {
-        navigator.notification.alert("debes introducir usuario e contrasinal", function() {});
+        navigator.notification.alert("debes introducir usuario e contrasinal", function() {}, "ERRO DE AUTENTIACIÓN","OK");
         $("#submitButton").removeAttr("disabled");
     }
     return false;
