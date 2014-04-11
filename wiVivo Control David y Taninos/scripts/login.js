@@ -36,7 +36,7 @@ function handleLogin() {
     	.done(function(data){
 		    var tmp = data;
             navigator.notification.alert("resultado: ||"+tmp+"||");
-            if (tmp === true){
+            if (tmp === 1){
                 window.localStorage["username"] = u;
             	window.localStorage["password"] = p;             
             	window.location.href = "control.html";
