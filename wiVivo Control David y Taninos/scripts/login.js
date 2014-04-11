@@ -34,8 +34,9 @@ function handleLogin() {
     if(u !== '' && p!== '') {
         $.get(servidor_login, {username:u,password:p})
     	.done(function(data){
-		    navigator.notification.alert("resultado: "+data+"||");
-            if (data === 'true'){
+		    var tmp = data;
+            navigator.notification.alert("resultado: ||"+tmp+"||");
+            if (tmp === true){
                 window.localStorage["username"] = u;
             	window.localStorage["password"] = p;             
             	window.location.href = "control.html";
