@@ -22,17 +22,17 @@
             <table width=100%>
                 <tr>
                     <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="activaShow()">
-                        <h3><br/>::::::::::::::<br/></h3><h1>¡¡COMEZA O SHOW!!</h1>activarás as apps dos espectadores<h3><br/>::::::::::::::<br/></h3></button></td>
+                        <h3><br/>::::::::::::::<br/></h3><h1>¡¡COMEZA O SHOW!!</h1>activa apps espectadores<h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="desactivaShow()">
-                        <h3><br/>::::::::::::::<br/></h3><h1>¡¡DESACTIVA SHOW!!</h1>desactivarás as apps dos espectadores<h3><br/>::::::::::::::<br/></h3></button></td>
+                        <h3><br/>::::::::::::::<br/></h3><h1>¡¡DESACTIVA SHOW!!</h1>desactiva apps espectadores<h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr><tr>
                     <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="activaAplauso()">
-                        <h3><br/>::::::::::::::<br/></h3><h1>aplauso ON</h1>farás soar aplausos<h3><br/>::::::::::::::<br/></h3></button></td>
+                        <h3><br/>::::::::::::::<br/></h3><h1>aplauso ON</h1>soarán aplausos<h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="desactivaAplauso()">
-                        <h3><br/>::::::::::::::<br/></h3><h1>aplauso ON</h1>(opcional)<h3><br/>::::::::::::::<br/></h3></button></td>
+                        <h3><br/>::::::::::::::<br/></h3><h1>aplauso OFF</h1>(opcional)<h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr><tr>
                     <td><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="activaLoto()">
-                        <h3><br/>::::::::::::::<br/></h3><h1>loteria ON</h1>haberá un gañador cada vez que premas<h3><br/>::::::::::::::<br/></h3></button></td>
+                        <h3><br/>::::::::::::::<br/></h3><h1>loteria ON</h1>un gañador cada vez que premas<h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="desactivaLoto()">
                         <h3><br/>::::::::::::::<br/></h3><h1>loteria OFF</h1>(opcional)<h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr>
@@ -136,31 +136,31 @@
             <h2>ADMINISTRADOR</h2>
             <table width=100%>
                 <tr>
-                    <td><input type="text" id="t_global" placeholder="t. global(10000)" value="" />
+                    <td><form id="ft_global">(5 a 60 seg)<input type="number" id="t_global" placeholder="t. global(10seg)" value="" /></form>
                         <button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="actualizaTGlobal()">
                         <h3><br/>::::::::::::::<br/></h3><h1>actualiza TGlobal</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="defectoTGlobal()">
                         <h3><br/>::::::::::::::<br/></h3><h1>valor defecto TGlobal</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr><tr>
-                    <td><input type="text" id="t_selfie" placeholder="t. selfie(20000)" value="" />
+                    <td><form id="ft_selfie">(10 a 120 seg)<input type="number" id="t_selfie" placeholder="t. selfie(20)" value="" /></form>
                         <button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="actualizaTSelfie()">
                         <h3><br/>::::::::::::::<br/></h3><h1>actualiza TSelfie</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="defectoTSelfie()">
                         <h3><br/>::::::::::::::<br/></h3><h1>valor defecto TSelfie</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr><tr>
-                    <td><input type="text" id="t_loto" placeholder="t. loto(20000)" value="" />
+                    <td><form id="ft_loto">(10 a 120 seg)<input type="number" id="t_loto" placeholder="t. loto(20)" value="" /></form>
                         <button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="actualizaTLoto()">
                         <h3><br/>::::::::::::::<br/></h3><h1>actualiza TLoto</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="defectoTLoto()">
                         <h3><br/>::::::::::::::<br/></h3><h1>valor defecto TLoto</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr><tr>
-                    <td><input type="text" id="t_colorines" placeholder="t. colorines(20000)" value="" />
+                    <td><form id="ft_colorines">(10 a 120 seg)<input type="number" id="t_colorines" placeholder="t. colorines(20)" value="" /></form>
                         <button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="actualizaTColorines()">
                         <h3><br/>::::::::::::::<br/></h3><h1>actualiza TColorines</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="defectoTColorines()">
                         <h3><br/>::::::::::::::<br/></h3><h1>valor defecto TColorines</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                 </tr><tr>
-                    <td><input type="text" id="t_intermitencia" placeholder="t. intermitentia(200)" value="" />
+                    <td><form id="ft_intermitencia">(100 a 500 mseg)<input type="number" id="t_intermitencia" placeholder="t. intermitentia(200)" value="" /></form>
                         <button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="actualizaTIntermitencia()">
                         <h3><br/>::::::::::::::<br/></h3><h1>actualiza TIntermitencia</h1><h3><br/>::::::::::::::<br/></h3></button></td>
                     <td><button class="boton-blanco boton-centro boton-text-all-color" type="button" onclick="defectoTIntermitencia()">

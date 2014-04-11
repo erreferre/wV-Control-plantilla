@@ -34,10 +34,10 @@ function handleLogin() {
     if(u !== '' && p!== '') {
         $.get(servidor_login, {username:u,password:p})
     	.done(function(data){
-            alert(data);
+            //alert(data);
 		    var tmp = data;
             //navigator.notification.alert("resultado: ||"+tmp+"||");
-            if (tmp === tmp) alert('kkk '+tmp);
+            //if (tmp === tmp) alert('kkk '+tmp);
             if (tmp === '1'){
                 window.localStorage["username"] = u;
             	window.localStorage["password"] = p;             

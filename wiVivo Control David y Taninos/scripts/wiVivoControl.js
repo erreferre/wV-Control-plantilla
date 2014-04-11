@@ -18,6 +18,12 @@ var servidor_desact_aplauso = webservice_wivivo + 'desactiva_aplauso.php';
 var servidor_sube = webservice_wivivo + 'sube.php';
 var servidor_thumb = webservice_wivivo + 'creaThumbImagen.php';
 
+var servidor_activa_show = webservice_wivivo + 'activa_show.php';
+var servidor_activa_showempezado = webservice_wivivo + 'activa_showempezado.php';
+var servidor_desactiva_show = webservice_wivivo + 'desactiva_show.php';
+var servidor_desactiva_showempezado = webservice_wivivo + 'desactiva_showempezado.php';
+var servidor_actualiza_tiempo = webservice_wivivo + 'actualiza_tiempo.php';
+
 var nombreFoto = null;
 //var repeticion;
 //var colores;
@@ -30,7 +36,8 @@ function onDeviceReady() {
     window.plugins.powerManagement.acquire();
     //PONER menubutton CUANDO SEA LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    document.addEventListener("backbutton", atrasApp, false);
+    //document.addEventListener("backbutton", atrasApp, false);
+    document.addEventListener("backbutton", exitAppPopup, false);
     leeConfiguracion();
 }
 
@@ -278,6 +285,7 @@ function desactivaShow(){
     $.get(servidor_desactiva_show)
     	.done(function(){
 		    alertaComando("SHOW PARADO!!","SHOW");
+            desactivaShowEmpezado();
         })
     	.fail(function(){
             falloConexion();
@@ -337,7 +345,17 @@ function desactivaAplauso(){
 
 //ADMIN
 function actualizaTGlobal(){
-    
+	var form = $("#ft_global");   
+    var tiempo = $("#t_global", form).val();
+    alert(tiempo);
+    var col = 'startConsultaServidorsetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Global","TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
 }
 function defectoTGlobal(){}
 function actualizaTSelfie(){}
