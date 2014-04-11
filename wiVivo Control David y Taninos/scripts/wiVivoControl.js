@@ -3,8 +3,8 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
 //variables Globales
-//var servidor_wivivo = 'http://srv001.liveshowsync.local';
-var servidor_wivivo = 'http://192.168.10.155';
+var servidor_wivivo = 'http://srv001.liveshowsync.local';
+//var servidor_wivivo = 'http://192.168.10.155';
 var webservice_wivivo = servidor_wivivo + '/liveshowsync/'; 
 var servidor_color1 = webservice_wivivo + 'actualiza_color1.php';
 var servidor_color2 = webservice_wivivo + 'actualiza_color2.php';
@@ -36,8 +36,8 @@ function onDeviceReady() {
     window.plugins.powerManagement.acquire();
     //PONER menubutton CUANDO SEA LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    //document.addEventListener("backbutton", atrasApp, false);
-    document.addEventListener("backbutton", exitAppPopup, false);
+    document.addEventListener("backbutton", atrasApp, false);
+    //document.addEventListener("backbutton", exitAppPopup, false);
     leeConfiguracion();
 }
 
@@ -62,78 +62,78 @@ function falloConexion(){
 //COLORES
 function ponColor1Amarillo(){
     $.get(servidor_color1, {color:"ffcc00"})
-    	.done(function(){    	alertaColor('AMARILLO',1);        })
-    	.fail(function(){            falloConexion();		});
+    	.done(function(){alertaColor('AMARILLO',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Azul(){
     $.get(servidor_color1, {color:"00ffff"})
-    	.done(function(){    		alertaColor('AZUL',1);        })
-    	.fail(function(){            falloConexion();        });
+    	.done(function(){alertaColor('AZUL',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Fucsia(){
     $.get(servidor_color1, {color:"8e149a"})
-    	.done(function(){		    alertaColor('FUCSIA',1);        })
-    	.fail(function(){            falloConexion();        });
+    	.done(function(){alertaColor('FUCSIA',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Naranja(){
     $.get(servidor_color1, {color:"f77331"})
-    	.done(function(){		    alertaColor('NARANJA',1);        })
-    	.fail(function(){            falloConexion();        });
+    	.done(function(){alertaColor('NARANJA',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Rojo(){
     $.get(servidor_color1, {color:"ff0000"})
-    	.done(function(){		    alertaColor('ROJO',1);        })
-    	.fail(function(){            falloConexion();        });
+    	.done(function(){alertaColor('ROJO',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Verde(){
     $.get(servidor_color1, {color:"40ff00"})
-    	.done(function(){		    alertaColor('VERDE',1);        })
-    	.fail(function(){            falloConexion();        });
+    	.done(function(){alertaColor('VERDE',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Blanco(){
     $.get(servidor_color1, {color:"ffffff"})
-    	.done(function(){	    alertaColor('BLANCO',1);        })
-    	.fail(function(){           falloConexion();        });
+    	.done(function(){alertaColor('BLANCO',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor1Negro(){
     $.get(servidor_color1, {color:"000000"})
-    	.done(function(){	    alertaColor('NEGRO',1);        })
-    	.fail(function(){		falloConexion();        });
+    	.done(function(){alertaColor('NEGRO',1);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Amarillo(){
     $.get(servidor_color2, {color:"ffcc00"})
-    	.done(function(){    alertaColor('AMARILLO',2);        })
-    	.fail(function(){    falloConexion();        });
+    	.done(function(){alertaColor('AMARILLO',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Azul(){
     $.get(servidor_color2, {color:"00ffff"})
-    	.done(function(){alertaColor('AZUL',2);        })
-    	.fail(function(){falloConexion();        });
+    	.done(function(){alertaColor('AZUL',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Fucsia(){
     $.get(servidor_color2, {color:"8e149a"})
-    	.done(function(){alertaColor('FUCSIA',2);        })
-    	.fail(function(){falloConexion();        });
+    	.done(function(){alertaColor('FUCSIA',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Naranja(){
     $.get(servidor_color2, {color:"f77331"})
-    	.done(function(){alertaColor('NARANJA',2);        })
-    	.fail(function(){falloConexion();        });
+    	.done(function(){alertaColor('NARANJA',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Rojo(){
     $.get(servidor_color2, {color:"ff0000"})
-    	.done(function(){   alertaColor('ROJO',2);        })
-    	.fail(function(){falloConexion();        });
+    	.done(function(){alertaColor('ROJO',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Verde(){
     $.get(servidor_color2, {color:"40ff00"})
-    	.done(function(){alertaColor('VERDE',2);        })
-    	.fail(function(){falloConexion();        });
+    	.done(function(){alertaColor('VERDE',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Blanco(){
     $.get(servidor_color2, {color:"ffffff"})
-    	.done(function(){alertaColor('BLANCO',2);      })
-    	.fail(function(){falloConexion();    });
+    	.done(function(){alertaColor('BLANCO',2);})
+    	.fail(function(){falloConexion();});
 }
 function ponColor2Negro(){
     $.get(servidor_color2, {color:"000000"})
@@ -164,27 +164,31 @@ function intermitenciaAlta(){
 function activaShow(){
     navigator.notification.confirm(
         'se premes SI, comeza todo!'
-        , function(button) {
-            if (button !== 2) {
-                alert('HOLA');
-				$.get(servidor_activa_show)
+        , function(data) {
+            if (data === 2) {
+                $.get(servidor_activa_show)
     			.done(function(){
 		    		alertaComando("ESPECTÁCULO ARRINCADO!!","SHOW");
-					//setTimeout(showEmpezado,300000);
+					setTimeout(activaShowEmpezado,300000);
         		})
     			.fail(function(){
             		falloConexion();
 		        });
-              } 
+              }
           }
         , '¿COMEZA-LO SHOW?'
         , 'non, SI'
     );  
     return false;
 }
-function showEmpezado(){
+function activaShowEmpezado(){
     $.get(servidor_activa_showempezado)
     	.done(function(){alertaComando("non hai marcha atrás...","SHOW");})
+    	.fail(function(){falloConexion();});
+}
+function desactivaShowEmpezado(){
+    $.get(servidor_desactiva_showempezado)
+    	.done(function(){})
     	.fail(function(){falloConexion();});
 }
 function desactivaShow(){
@@ -203,7 +207,6 @@ function activaLoto(){
     	.fail(function(){falloConexion();});
     setTimeout(desactivaLoto,300000);
 }
-
 function desactivaLoto(){
     $.get(servidor_desact_loto)
     	.done(function(){alertaComando("DESACTIVADA","LOTO");})
@@ -224,7 +227,6 @@ function activaAplauso(){
     	.fail(function(){falloConexion();});
     setTimeout(desactivaAplauso,60000);
 }
-
 function desactivaAplauso(){
     $.get(servidor_desact_aplauso)
     	.done(function(){alertaComando("DESACTIVADO","APLAUSO");  })
@@ -235,29 +237,129 @@ function desactivaAplauso(){
 function actualizaTGlobal(){
 	var form = $("#ft_global");   
     var tiempo = $("#t_global", form).val();
-    alert(tiempo);
     var col = 'startConsultaServidorsetTimeout';
     $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
     	.done(function(){
-            alertaComando("T. Global","TEMPORIZADOR");
+            alertaComando("T. Global: "+tiempo,"TEMPORIZADOR");
         })
     	.fail(function(){
             falloConexion();
         });
 }
-function defectoTGlobal(){}
-function actualizaTSelfie(){}
-function defectoTSelfie(){}
-function actualizaTLoto(){}
-function defectoTLoto(){}
-function actualizaTColorines(){}
-function defectoTColorines(){}
-function actualizaTIntermitencia(){}
-function defectoTIntermitencia(){}
-function activaAlertas(){}
-function desactivaAlertas(){}
-function activaShowEmpezado(){}
-function desactivaShowEmpezado(){}
+function defectoTGlobal(){
+    var tiempo = 10000;
+    var col = 'startConsultaServidorsetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Global: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function actualizaTSelfie(){
+    var form = $("#ft_global");   
+    var tiempo = $("#t_global", form).val();
+    var col = 'startSelfiesetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Selfie: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function defectoTSelfie(){
+    var tiempo = 20000;
+    var col = 'startSelfiesetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Selfie: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function actualizaTLoto(){
+    var form = $("#ft_global");   
+    var tiempo = $("#t_global", form).val();
+    var col = 'startLotosetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function defectoTLoto(){
+    var tiempo = 20000;
+    var col = 'startLotosetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function actualizaTColorines(){
+    var form = $("#ft_global");   
+    var tiempo = $("#t_global", form).val();
+    var col = 'startColorinessetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Colorines: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function defectoTColorines(){
+    var tiempo = 20000;
+    var col = 'startColorinessetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Colorines: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function actualizaTIntermitencia(){
+    var form = $("#ft_global");   
+    var tiempo = $("#t_global", form).val();
+    var col = 'startIntermitenciasetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Intermitencia: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function defectoTIntermitencia(){
+    var tiempo = 200;
+    var col = 'startIntermitenciasetTimeout';
+    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+    	.done(function(){
+            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function activaAlertas(){
+    $.get(servidor_activa_alertas)
+    	.done(function(){alertaComando("ACTIVADA","ALERTAS");})
+    	.fail(function(){falloConexion();});
+}
+function desactivaAlertas(){
+    $.get(servidor_desact_alertas)
+    	.done(function(){alertaComando("DESACTIVADO","ALERTAS");  })
+    	.fail(function(){falloConexion();});    
+}
+
 
 //Fotos con "capture"
 function captureImage() {
@@ -282,7 +384,7 @@ function captureSuccess(mediaFiles) {
 
 // Called if something bad happens.
 function captureError(error) {
-    navigator.notification.alert("Volve a saca-la foto", "ERRO EN CAPTURA", "ERROR EN CAPTURA");
+    navigator.notification.alert("Volve a saca-la foto", function(){},"ERRO EN CAPTURA", "OK");
     //navigator.notification.alert(msg, null, 'Uh oh!');
 }
 
@@ -317,7 +419,7 @@ function uploadSuccess(r) {
 
 function uploadError(error) {
     //alert("Saca outra foto. Houbo un erro: Code = " + error.code + ", source = " + error.source + ", target = " + error.target);
-    navigator.notification.alert("Saca a foto de novo. Houbo un erro", "ERRO NA SUBIDA", " ERRO NA SUBIDA");
+    navigator.notification.alert("Saca a foto de novo. Houbo un erro",function(){}, "ERRO NA SUBIDA", "OK");
     console.log("upload error source " + error.source);
     console.log("upload error target " + error.target);
 }
