@@ -60,6 +60,22 @@ function falloConexion(){
 }
 
 //COLORES
+function ponColor(color,i){
+    var tmp;
+    switch (color){
+        case amarillo: tmp="ffcc00";break;
+        case azul: tmp="00ffff";break;
+        case fucsia: tmp="8e149a";break;
+        case naranja: tmp="f77331";break;
+        case rojo: tmp="ff0000";break;
+        case verde: tmp="40ff00";break;
+        case blanco: tmp="ffffff";break;
+        case negro: tmp="000000";
+    };
+    $.get(servidor_color, {color:tmp,indice:i})
+    	.done(function(){alertaColor(color,i);})
+    	.fail(function(){falloConexion();});
+}
 function ponColor1Amarillo(){
     $.get(servidor_color1, {color:"ffcc00"})
     	.done(function(){alertaColor('AMARILLO',1);})
