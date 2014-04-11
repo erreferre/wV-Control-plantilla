@@ -37,27 +37,39 @@ function onDeviceReady() {
 function leeConfiguracion() {
     $.getJSON(servidor_lee)
     	.fail(function(jqxhr, textStatus, error){
-    		navigator.notification.alert("Proba de novo, ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi e volve a lanza-la App","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
+    		navigator.notification.alert("Proba de novo, ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi e volve a lanza-la App",function(){},"ERRO DE COMUNICACION","OK");
     	});
 }
 
+//ALERTAS
+function alertaColor(color,i){
+    navigator.notification.alert(color,function(){},"COLOR"+i,"OK");
+}
+function alertaComando(mensaje,titulo){
+    navigator.notification.alert(mensaje,function(){},titulo,"OK");
+}
+function falloConexion(){
+	navigator.notification.alert("Proba de novo, non dei executado a acción",function(){},"ERRO DE COMUNICACION","OK");    
+}
+
+//COLORES
 function ponColor1Amarillo(){
     $.get(servidor_color1, {color:"ffcc00"})
     	.done(function(){
-        	navigator.notification.alert("seleccionado AMARILLO","COLOR1","COLOR1");   
+        	alertaColor('AMARILLO',1);
         })
     	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
+            falloConexion();
 		});
 }
 
 function ponColor1Azul(){
     $.get(servidor_color1, {color:"00ffff"})
     	.done(function(){
-    		navigator.notification.alert("seleccionado AZUL","COLOR1","COLOR1");
+    		alertaColor('AZUL',1);
         })
     	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
+            falloConexion();
         });
 }
 
@@ -124,10 +136,10 @@ function ponColor1Negro(){
 function ponColor2Amarillo(){
     $.get(servidor_color2, {color:"ffcc00"})
     	.done(function(){
-		    navigator.notification.alert("seleccionado AMARILLO","COLOR2","COLOR2");
+		    alertaColor('AMARILLO',2);
         })
     	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
+            falloConexion();
         });
 }
 
@@ -201,20 +213,21 @@ function ponColor2Negro(){
         });
 }
 
+//INTERMITENCIA
 function intermitenciaNula(){
     $.get(servidor_intermitencia, {intermitencia:"0"})
     	.done(function(){
-		    navigator.notification.alert("seleccionado INTERMITENCIA NULA","INTERMITENCIA","INTERMITENCIA");
+		    alertaComando("NULA","INTERMITENCIA");
         })
     	.fail(function(){
-            navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
+            falloConexion();
         });
 }
 
 function intermitenciaBaja(){
     $.get(servidor_intermitencia, {intermitencia:"1"})
     	.done(function(){
-		    navigator.notification.alert("seleccionado INTERMITENCIA BAJA","INTERMITENCIA","INTERMITENCIA");
+		    alertaComando("BAJA","INTERMITENCIA");
         })
     	.fail(function(){
             navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
@@ -224,46 +237,87 @@ function intermitenciaBaja(){
 function intermitenciaAlta(){
     $.get(servidor_intermitencia, {intermitencia:"2"})
     	.done(function(){
-		    navigator.notification.alert("seleccionado INTERMITENCIA ALTA","INTERMITENCIA","INTERMITENCIA");
+		    alertaComando("ALTA","INTERMITENCIA");
         })
     	.fail(function(){
             navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
         });
 }
 
+//COMANDOS
+function activaShow(){
+    navigator.notification.confirm(
+        'se premes si, comeza todo!'
+        , function(button) {
+            if (button === 2) {
+				$.get(servidor_activa_show)
+    			.done(function(){
+		    		alertaComando("ESPECTÁCULO ARRINCADO!!","SHOW");
+					setTimeout(showEmpezado,300000);
+        		})
+    			.fail(function(){
+            		falloConexion();
+		        });
+              } 
+          }
+        , '¿COMEZA-LO SHOW?'
+        , 'non, si'
+    );  
+    return false;
+}
+function showEmpezado(){
+    $.get(servidor_activa_showempezado)
+    	.done(function(){
+		    alertaComando("non hai marcha atrás...","SHOW");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+function desactivaShow(){
+    $.get(servidor_desactiva_show)
+    	.done(function(){
+		    alertaComando("SHOW PARADO!!","SHOW");
+        })
+    	.fail(function(){
+            falloConexion();
+        });
+}
+
+//LOTO
 function activaLoto(){
     $.get(servidor_activa_loto)
     	.done(function(){
-		    navigator.notification.alert("ACTIVADA","LOTO","LOTO");
+		    alertaComando("ACTIVADA","LOTO");
         })
     	.fail(function(){
             navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
         });
-    //setTimeout(desactivaLoto,15000);
+    setTimeout(desactivaLoto,300000);
 }
 
 function desactivaLoto(){
     $.get(servidor_desact_loto)
     	.done(function(){
-		    navigator.notification.alert("DESACTIVADA","LOTO","LOTO");
+		    navigator.notification.alert("DESACTIVADA",function(){},"LOTO","OK");
         })
     	.fail(function(){
             navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
         });
 }
 
-function activaPedo(){
-    $.get(servidor_activa_pedo);
-    setTimeout(desactivaPedo,15000);
-}
-function desactivaPedo(){
-    $.get(servidor_desact_pedo);
-}
+//function activaPedo(){
+//    $.get(servidor_activa_pedo);
+//    setTimeout(desactivaPedo,15000);
+//}
+//function desactivaPedo(){
+//    $.get(servidor_desact_pedo);
+//}
 
 function activaAplauso(){
     $.get(servidor_activa_aplauso)
     	.done(function(){
-		    navigator.notification.alert("ACTIVADO","APLAUSO","APLAUSO");
+		    navigator.notification.alert("ACTIVADO",function(){},"APLAUSO","OK");
         })
     	.fail(function(){
             navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
@@ -274,12 +328,30 @@ function activaAplauso(){
 function desactivaAplauso(){
     $.get(servidor_desact_aplauso)
     	.done(function(){
-		    navigator.notification.alert("DESACTIVADO","APLAUSO","APLAUSO");
+		    navigator.notification.alert("DESACTIVADO",function(){},"APLAUSO","OK");
         })
     	.fail(function(){
             navigator.notification.alert("Proba de novo, non dei executado a acción","ERRO DE COMUNICACION","ERRO DE COMUNICACION");
         });
 }
+
+//ADMIN
+function actualizaTGlobal(){
+    
+}
+function defectoTGlobal(){}
+function actualizaTSelfie(){}
+function defectoTSelfie(){}
+function actualizaTLoto(){}
+function defectoTLoto(){}
+function actualizaTColorines(){}
+function defectoTColorines(){}
+function actualizaTIntermitencia(){}
+function defectoTIntermitencia(){}
+function activaAlertas(){}
+function desactivaAlertas(){}
+function activaShowEmpezado(){}
+function desactivaShowEmpezado(){}
 
 //Fotos con "capture"
 function captureImage() {
@@ -369,5 +441,5 @@ function exitAppPopup() {
 }
     
 function atrasApp(){
-	    location.href='index.html';
+	    location.href='control.html#tabstrip-fogar';
 }

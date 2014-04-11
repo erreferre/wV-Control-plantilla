@@ -1,5 +1,5 @@
 //function init() {
-document.addEventListener("deviceready", onDeviceReady, true);
+document.addEventListener("deviceready", onDeviceReady, false);
 //delete init;
 //}
 
@@ -36,8 +36,8 @@ function handleLogin() {
     	.done(function(data){
 		    var tmp = data;
             //navigator.notification.alert("resultado: ||"+tmp+"||");
-            if (tmp === tmp) alert('kk');
-            if (tmp === 1){
+            if (tmp === tmp) alert('kk '+tmp);
+            if (tmp === '1'){
                 window.localStorage["username"] = u;
             	window.localStorage["password"] = p;             
             	window.location.href = "control.html";
