@@ -163,13 +163,14 @@ function intermitenciaAlta(){
 //COMANDOS
 function activaShow(){
     navigator.notification.confirm(
-        'se premes si, comeza todo!'
+        'se premes SI, comeza todo!'
         , function(button) {
-            if (button === 2) {
+            if (button !== 2) {
+                alert('HOLA');
 				$.get(servidor_activa_show)
     			.done(function(){
 		    		alertaComando("ESPECTÁCULO ARRINCADO!!","SHOW");
-					setTimeout(showEmpezado,300000);
+					//setTimeout(showEmpezado,300000);
         		})
     			.fail(function(){
             		falloConexion();
@@ -177,7 +178,7 @@ function activaShow(){
               } 
           }
         , '¿COMEZA-LO SHOW?'
-        , 'non, si'
+        , 'non, SI'
     );  
     return false;
 }
