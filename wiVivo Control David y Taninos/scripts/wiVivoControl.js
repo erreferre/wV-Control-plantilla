@@ -5,7 +5,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 //variables Globales
 var servidor_wivivo = 'http://srv001.liveshowsync.local';
 //var servidor_wivivo = 'http://192.168.10.155';
-var webservice_wivivo = servidor_wivivo + '/liveshowsync/'; 
+var webservice_wivivo = servidor_wivivo + '/liveshowsync/';
+var servidor_comandos = webservice_wivivo + 'comandos.php'; 
 var servidor_color1 = webservice_wivivo + 'actualiza_color1.php';
 var servidor_color2 = webservice_wivivo + 'actualiza_color2.php';
 var servidor_intermitencia = webservice_wivivo + 'actualiza_intermitencia.php';
@@ -15,6 +16,7 @@ var servidor_activa_pedo = webservice_wivivo + 'activa_pedo.php';
 var servidor_desact_pedo = webservice_wivivo + 'desactiva_pedo.php';
 var servidor_activa_aplauso = webservice_wivivo + 'activa_aplauso.php';
 var servidor_desact_aplauso = webservice_wivivo + 'desactiva_aplauso.php';
+var servidor_lee = webservice_wivivo + 'lee.php';
 var servidor_sube = webservice_wivivo + 'sube.php';
 var servidor_thumb = webservice_wivivo + 'creaThumbImagen.php';
 
@@ -25,10 +27,11 @@ var servidor_desactiva_showempezado = webservice_wivivo + 'desactiva_showempezad
 var servidor_actualiza_tiempo = webservice_wivivo + 'actualiza_tiempo.php';
 
 var nombreFoto = null;
-//var repeticion;
-//var colores;
-//var indice;
-//var colorseleccionado;
+
+//temporizadores
+var activaShowEmpezadosetTimeout = null;
+var desactivaLotosetTimeout = null;
+var desactivaAplausosetTimeout = null;
 
 // PhoneGap is ready
 function onDeviceReady() {
@@ -36,8 +39,8 @@ function onDeviceReady() {
     window.plugins.powerManagement.acquire();
     //PONER menubutton CUANDO SEA LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    document.addEventListener("backbutton", atrasApp, false);
-    //document.addEventListener("backbutton", exitAppPopup, false);
+    //document.addEventListener("backbutton", atrasApp, false);
+    document.addEventListener("backbutton", exitAppPopup, false);
     leeConfiguracion();
 }
 
@@ -60,22 +63,24 @@ function falloConexion(){
 }
 
 //COLORES
-function ponColor(color,i){
-    var tmp;
-    switch (color){
-        case amarillo: tmp="ffcc00";break;
-        case azul: tmp="00ffff";break;
-        case fucsia: tmp="8e149a";break;
-        case naranja: tmp="f77331";break;
-        case rojo: tmp="ff0000";break;
-        case verde: tmp="40ff00";break;
-        case blanco: tmp="ffffff";break;
-        case negro: tmp="000000";
-    };
-    $.get(servidor_color, {color:tmp,indice:i})
-    	.done(function(){alertaColor(color,i);})
-    	.fail(function(){falloConexion();});
-}
+//function ponColor(color,i){
+//    var tmp1="000000";
+//    var tmp2 = i;
+//    alert(color);
+//    switch (color){
+//        case amarillo: tmp1="ffcc00";break;
+//        case azul: tmp1="00ffff";break;
+//        case fucsia: tmp1="8e149a";break;
+//        case naranja: tmp1="f77331";break;
+//        case rojo: tmp1="ff0000";break;
+//        case verde: tmp1="40ff00";break;
+//        case blanco: tmp1="ffffff";break;
+//        case negro: tmp1="000000";
+//    }
+//    $.get(servidor_comandos, {columna:tmp2,valor:tmp1})
+//    	.done(function(){alertaColor(color,i);})
+//    	.fail(function(){falloConexion();});
+//}
 function ponColor1Amarillo(){
     $.get(servidor_color1, {color:"ffcc00"})
     	.done(function(){alertaColor('AMARILLO',1);})
@@ -185,7 +190,7 @@ function activaShow(){
                 $.get(servidor_activa_show)
     			.done(function(){
 		    		alertaComando("ESPECTÁCULO ARRINCADO!!","SHOW");
-					setTimeout(activaShowEmpezado,300000);
+					activaShowEmpezadosetTimeout = setTimeout(activaShowEmpezado,300000);
         		})
     			.fail(function(){
             		falloConexion();
@@ -199,21 +204,37 @@ function activaShow(){
 }
 function activaShowEmpezado(){
     $.get(servidor_activa_showempezado)
-    	.done(function(){alertaComando("non hai marcha atrás...","SHOW");})
+    	.done(function(){alertaComando("xa non hai marcha atrás...","SHOW");})
     	.fail(function(){falloConexion();});
 }
 function desactivaShowEmpezado(){
     $.get(servidor_desactiva_showempezado)
     	.done(function(){})
     	.fail(function(){falloConexion();});
+    if (activaShowEmpezadosetTimeout !== null) {
+        clearTimeout(activaShowEmpezadosetTimeout);
+        activaShowEmpezadosetTimeout = null;
+    }
 }
 function desactivaShow(){
-    $.get(servidor_desactiva_show)
-    	.done(function(){
-		    alertaComando("SHOW PARADO!!","SHOW");
-            desactivaShowEmpezado();
-        })
-    	.fail(function(){falloConexion();});
+    navigator.notification.confirm(
+        'se premes SI, PARARÁS TODO!'
+        , function(data) {
+            if (data === 2) {
+                $.get(servidor_desactiva_show)
+    			.done(function(){
+		    		alertaComando("ESPECTÁCULO PARADO!!","SHOW");
+					desactivaShowEmpezado();
+        		})
+    			.fail(function(){
+            		falloConexion();
+		        });
+              }
+          }
+        , '¿PARA-LO SHOW?'
+        , 'non, SI'
+    );  
+    return false;
 }
 
 //LOTO
@@ -221,12 +242,16 @@ function activaLoto(){
     $.get(servidor_activa_loto)
     	.done(function(){alertaComando("ACTIVADA","LOTO");})
     	.fail(function(){falloConexion();});
-    setTimeout(desactivaLoto,300000);
+    desactivaLotosetTimeout = setTimeout(desactivaLoto,300000);
 }
 function desactivaLoto(){
     $.get(servidor_desact_loto)
     	.done(function(){alertaComando("DESACTIVADA","LOTO");})
     	.fail(function(){falloConexion();});
+	if (desactivaLotosetTimeout !== null) {
+        clearTimeout(desactivaLotosetTimeout);
+        desactivaLotosetTimeout = null;
+    }
 }
 
 //function activaPedo(){
@@ -241,18 +266,23 @@ function activaAplauso(){
     $.get(servidor_activa_aplauso)
     	.done(function(){alertaComando("ACTIVADO","APLAUSO");})
     	.fail(function(){falloConexion();});
-    setTimeout(desactivaAplauso,60000);
+    desactivaAplausosetTimeout = setTimeout(desactivaAplauso,60000);
 }
 function desactivaAplauso(){
     $.get(servidor_desact_aplauso)
     	.done(function(){alertaComando("DESACTIVADO","APLAUSO");  })
     	.fail(function(){falloConexion();  });
+	if (desactivaAplausosetTimeout !== null) {
+        clearTimeout(desactivaAplausosetTimeout);
+        desactivaAplausosetTimeout = null;
+    }
 }
 
 //ADMIN
 function actualizaTGlobal(){
 	var form = $("#ft_global");   
     var tiempo = $("#t_global", form).val();
+    tiempo = tiempo + '000';
     var col = 'startConsultaServidorsetTimeout';
     $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
     	.done(function(){
@@ -276,6 +306,7 @@ function defectoTGlobal(){
 function actualizaTSelfie(){
     var form = $("#ft_global");   
     var tiempo = $("#t_global", form).val();
+    tiempo = tiempo + '000';    
     var col = 'startSelfiesetTimeout';
     $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
     	.done(function(){
@@ -299,6 +330,7 @@ function defectoTSelfie(){
 function actualizaTLoto(){
     var form = $("#ft_global");   
     var tiempo = $("#t_global", form).val();
+    tiempo = tiempo + '000';
     var col = 'startLotosetTimeout';
     $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
     	.done(function(){
@@ -322,6 +354,7 @@ function defectoTLoto(){
 function actualizaTColorines(){
     var form = $("#ft_global");   
     var tiempo = $("#t_global", form).val();
+    tiempo = tiempo + '000';
     var col = 'startColorinessetTimeout';
     $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
     	.done(function(){
@@ -444,7 +477,7 @@ function uploadError(error) {
 function makeId(){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 8; i++ )
+    for( var i=0; i < 3; i++ )
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
 }
