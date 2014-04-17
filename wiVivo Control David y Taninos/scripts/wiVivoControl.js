@@ -39,8 +39,8 @@ function onDeviceReady() {
     window.plugins.powerManagement.acquire();
     //PONER menubutton CUANDO SEA LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    //document.addEventListener("backbutton", atrasApp, false);
-    document.addEventListener("backbutton", exitAppPopup, false);
+    document.addEventListener("backbutton", atrasApp, false);
+    //document.addEventListener("backbutton", exitAppPopup, false);
     leeConfiguracion();
 }
 
