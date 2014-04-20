@@ -7,12 +7,12 @@ var servidor_wivivo = 'http://srv001.liveshowsync.local';
 //var servidor_wivivo = 'http://192.168.10.155';
 var webservice_wivivo = servidor_wivivo + '/liveshowsync/';
 
-var servidor_comandos = webservice_wivivo + 'comandos.php'; 
+//var servidor_comandos = webservice_wivivo + 'comandos.php'; 
 var servidor_color1 = webservice_wivivo + 'actualiza_color1.php';
 var servidor_color2 = webservice_wivivo + 'actualiza_color2.php';
 var servidor_intermitencia = webservice_wivivo + 'actualiza_intermitencia.php';
-var servidor_activa_loto = webservice_wivivo + 'activa_loto.php';
-var servidor_desactiva_loto = webservice_wivivo + 'desactiva_loto.php';
+//var servidor_activa_loto = webservice_wivivo + 'activa_loto.php';
+//var servidor_desactiva_loto = webservice_wivivo + 'desactiva_loto.php';
 var servidor_activa_guapo = webservice_wivivo + 'activa_guapo.php';
 var servidor_desactiva_guapo = webservice_wivivo + 'desactiva_guapo.php';
 var servidor_activa_pedo = webservice_wivivo + 'activa_pedo.php';
@@ -32,7 +32,7 @@ var servidor_activa_show = webservice_wivivo + 'activa_show.php';
 var servidor_activa_showempezado = webservice_wivivo + 'activa_showempezado.php';
 var servidor_desactiva_show = webservice_wivivo + 'desactiva_show.php';
 var servidor_desactiva_showempezado = webservice_wivivo + 'desactiva_showempezado.php';
-var servidor_actualiza_tiempo = webservice_wivivo + 'actualiza_tiempo.php';
+//var servidor_actualiza_tiempo = webservice_wivivo + 'actualiza_tiempo.php';
 var servidor_activa_alertas = webservice_wivivo + 'activa_alertas.php';
 var servidor_desactiva_alertas = webservice_wivivo + 'desactiva_alertas.php';
 
@@ -40,7 +40,7 @@ var nombreFoto = null;
 
 //temporizadores
 var activaShowEmpezadosetTimeout = null;
-var desactivaLotosetTimeout = null;
+//var desactivaLotosetTimeout = null;
 var desactivaGuaposetTimeout = null;
 var desactivaAplausosetTimeout = null;
 var desactivaPedosetTimeout = null;
@@ -51,16 +51,16 @@ function onDeviceReady() {
     window.plugins.powerManagement.acquire();
     //PONER menubutton CUANDO SEA LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    document.addEventListener("backbutton", atrasApp, false);
-    //document.addEventListener("backbutton", exitAppPopup, false);
+    //document.addEventListener("backbutton", atrasApp, false);
+    document.addEventListener("backbutton", exitAppPopup, false);
     leeConfiguracion();
 }
 
 function leeConfiguracion() {
     $.getJSON(servidor_lee)
-    	.fail(function(jqxhr, textStatus, error){
-    		navigator.notification.alert("Proba de novo, ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi e volve a lanza-la App",function(){},"ERRO DE COMUNICACION","OK");
-    	});
+    .fail(function(jqxhr, textStatus, error){
+    	navigator.notification.alert("Proba de novo, ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi e volve a lanza-la App",function(){},"ERRO DE COMUNICACION","OK");
+    });
 }
 
 //ALERTAS
@@ -154,9 +154,7 @@ function activaShow(){
 		    		alertaComando("ESPECTÁCULO ARRINCADO!!","SHOW");
 					activaShowEmpezadosetTimeout = setTimeout(activaShowEmpezado,300000);
         		})
-    			.fail(function(){
-            		falloConexion();
-		        });
+    			.fail(function(){falloConexion();});
               }
           }
         , '¿COMEZA-LO SHOW?'
@@ -188,9 +186,7 @@ function desactivaShow(){
 		    		alertaComando("ESPECTÁCULO PARADO!!","SHOW");
 					desactivaShowEmpezado();
         		})
-    			.fail(function(){
-            		falloConexion();
-		        });
+    			.fail(function(){falloConexion();});
               }
           }
         , '¿PARA-LO SHOW?'
@@ -426,7 +422,7 @@ function activaAlertas(){
 }
 function desactivaAlertas(){
     $.get(servidor_desactiva_alertas)
-    	.done(function(){alertaComando("DESACTIVADAS","ALERTAS");  })
+    	.done(function(){alertaComando("DESACTIVADAS","ALERTAS");})
     	.fail(function(){falloConexion();});    
 }
 
@@ -444,10 +440,10 @@ function captureSuccess(mediaFiles) {
         smallImage.style.display = 'block';
         // Show the captured photo.
         smallImage.src = mediaFiles[i].fullPath;
-        var rutafoto = document.getElementById("rutafoto");
-    	rutafoto.innerHTML = '<p>quédache a foto eiquí: ' + mediaFiles[i].fullPath + '</p>';
-	    var rutasubida = document.getElementById("rutasubida");
-		rutasubida.innerHTML = '<p>espera uns segundos a que sexa subida...</p>';
+        var rutafoto1 = document.getElementById('rutafoto');
+    	rutafoto1.innerHTML = '<p>quédache a foto eiquí: ' + mediaFiles[i].fullPath + '</p>';
+	    var rutasubida1 = document.getElementById('rutasubida');
+		rutasubida1.innerHTML = '<p>espera uns segundos a que sexa subida...</p>';
         uploadPhoto(mediaFiles[i]);
     }       
 }
@@ -467,9 +463,9 @@ function uploadPhoto(mediaFile) {
     options.mimeType = "image/jpeg";
 	options.chunkedMode = false;
 	options.headers = {Connection: "close"};
-    path = mediaFile.fullPath;
+    var path = mediaFile.fullPath;
     var params = {};
-    params.value1 = "Show David&Taninos";
+    params.value1 = "Show David e Taninos";
     params.value2 = "davytan";
     options.params = params;
     var ft = new FileTransfer();
@@ -480,12 +476,16 @@ function uploadSuccess(r) {
     //console.log("Code = " + r.responseCode);
     //console.log("Response = " + r.response);
     //console.log("Sent = " + r.bytesSent);
-    rutasubida = document.getElementById("rutasubida");
 	//rutasubida.innerHTML = '<p>foto subida OK!<br/>' + r.responseCode + '<br/>' + r.response + '<br/>' + r.bytesSent + '</p>'
     //comprimimos foto subida
-    $.get(servidor_thumb, {imagen:nombreFoto});
-    //acabamos
-	rutasubida.innerHTML = '<p>FOTO SUBIDA OK!</p>';
+    $.get(servidor_thumb, {imagen:nombreFoto})
+    .done(function(){
+	    var rutasubida2 = document.getElementById("rutasubida");
+		rutasubida2.innerHTML = '<p>FOTO SUBIDA OK!</p>';
+        })
+    .fail(function(){
+        navigator.notification.alert("Saca a foto de novo. Houbo un erro",function(){}, "ERRO NA SUBIDA", "OK");
+    });
 }
 
 function uploadError(error) {
