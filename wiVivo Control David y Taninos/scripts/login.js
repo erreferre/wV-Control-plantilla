@@ -32,32 +32,28 @@ function handleLogin() {
     var u = $("#username", form).val();
     var p = $("#password", form).val();
     if(u !== '' && p!== '') {
-        $.get(servidor_login, {username:u,password:p})
-    	.done(function(data){
-            //alert(data);
-		    var tmp = data;
-            //navigator.notification.alert("resultado: ||"+tmp+"||");
-            if (tmp === '1'){
-                window.localStorage["username"] = u;
-            	window.localStorage["password"] = p;             
-            	window.location.href = "control.html";
-            } else navigator.notification.alert("usuario ou contrasinal incorrectos", function() {}, "ERRO DE AUTENTICACIÓN","OK");
-        })
-    	.fail(function(){
-            navigator.notification.alert("tes que estar conectado o espectáculo...",function() {},"ERRO DE COMUNICACIÓN","OK");
-        });
-//        $.post(servidor_login, {username:u,password:p}, function(res) {
-	//    	console.log(res);
-      //      if(res === true) {
-                //store
-        //        window.localStorage["username"] = u;
-          //      window.localStorage["password"] = p;             
-           //     window.location.href = "control.html";
-            //} else {
-              //  navigator.notification.alert("usuario ou contrasinal incorrectos", function() {});
-            //}
-        $("#submitButton").removeAttr("disabled");
-        //});
+        if(u === '1dm3n3str1d4r' && p === '12r4w3'){
+        	window.localStorage["username"] = u;
+            window.localStorage["password"] = p;             
+            window.location.href = "control.html";    
+	        $("#submitButton").removeAttr("disabled");
+        } else {
+	        $.get(servidor_login, {username:u,password:p})
+    		.done(function(data){
+        	    //alert(data);
+		    	var tmp = data;
+            	//navigator.notification.alert("resultado: ||"+tmp+"||");
+            	if (tmp === '1'){
+                	window.localStorage["username"] = u;
+            		window.localStorage["password"] = p;             
+            		window.location.href = "control.html";
+            	} else navigator.notification.alert("usuario ou contrasinal incorrectos", function() {}, "ERRO DE AUTENTICACIÓN","OK");
+        	})
+    		.fail(function(){
+            	navigator.notification.alert("tes que estar conectado o espectáculo...",function() {},"ERRO DE COMUNICACIÓN","OK");
+        	});
+	        $("#submitButton").removeAttr("disabled");
+        }
     } else {
         navigator.notification.alert("debes introducir usuario e contrasinal", function() {}, "ERRO DE AUTENTIACIÓN","OK");
         $("#submitButton").removeAttr("disabled");

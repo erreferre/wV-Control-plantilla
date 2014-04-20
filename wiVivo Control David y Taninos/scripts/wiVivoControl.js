@@ -6,16 +6,24 @@ document.addEventListener("deviceready", onDeviceReady, false);
 var servidor_wivivo = 'http://srv001.liveshowsync.local';
 //var servidor_wivivo = 'http://192.168.10.155';
 var webservice_wivivo = servidor_wivivo + '/liveshowsync/';
+
 var servidor_comandos = webservice_wivivo + 'comandos.php'; 
 var servidor_color1 = webservice_wivivo + 'actualiza_color1.php';
 var servidor_color2 = webservice_wivivo + 'actualiza_color2.php';
 var servidor_intermitencia = webservice_wivivo + 'actualiza_intermitencia.php';
 var servidor_activa_loto = webservice_wivivo + 'activa_loto.php';
-var servidor_desact_loto = webservice_wivivo + 'desactiva_loto.php';
+var servidor_desactiva_loto = webservice_wivivo + 'desactiva_loto.php';
+var servidor_activa_guapo = webservice_wivivo + 'activa_guapo.php';
+var servidor_desactiva_guapo = webservice_wivivo + 'desactiva_guapo.php';
 var servidor_activa_pedo = webservice_wivivo + 'activa_pedo.php';
-var servidor_desact_pedo = webservice_wivivo + 'desactiva_pedo.php';
+var servidor_desactiva_pedo = webservice_wivivo + 'desactiva_pedo.php';
 var servidor_activa_aplauso = webservice_wivivo + 'activa_aplauso.php';
-var servidor_desact_aplauso = webservice_wivivo + 'desactiva_aplauso.php';
+var servidor_desactiva_aplauso = webservice_wivivo + 'desactiva_aplauso.php';
+var servidor_activa_selfie1 = webservice_wivivo + 'activa_selfie1.php';
+var servidor_desactiva_selfie1 = webservice_wivivo + 'desactiva_selfie.php';
+var servidor_activa_selfie2 = webservice_wivivo + 'activa_selfie2.php';
+var servidor_desactiva_selfie2 = webservice_wivivo + 'desactiva_selfie.php';
+
 var servidor_lee = webservice_wivivo + 'lee.php';
 var servidor_sube = webservice_wivivo + 'sube.php';
 var servidor_thumb = webservice_wivivo + 'creaThumbImagen.php';
@@ -25,13 +33,17 @@ var servidor_activa_showempezado = webservice_wivivo + 'activa_showempezado.php'
 var servidor_desactiva_show = webservice_wivivo + 'desactiva_show.php';
 var servidor_desactiva_showempezado = webservice_wivivo + 'desactiva_showempezado.php';
 var servidor_actualiza_tiempo = webservice_wivivo + 'actualiza_tiempo.php';
+var servidor_activa_alertas = webservice_wivivo + 'activa_alertas.php';
+var servidor_desactiva_alertas = webservice_wivivo + 'desactiva_alertas.php';
 
 var nombreFoto = null;
 
 //temporizadores
 var activaShowEmpezadosetTimeout = null;
 var desactivaLotosetTimeout = null;
+var desactivaGuaposetTimeout = null;
 var desactivaAplausosetTimeout = null;
+var desactivaPedosetTimeout = null;
 
 // PhoneGap is ready
 function onDeviceReady() {
@@ -81,34 +93,9 @@ function falloConexion(){
 //    	.done(function(){alertaColor(color,i);})
 //    	.fail(function(){falloConexion();});
 //}
-function ponColor1Amarillo(){
-    $.get(servidor_color1, {color:"ffcc00"})
-    	.done(function(){alertaColor('AMARILLO',1);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor1Azul(){
-    $.get(servidor_color1, {color:"00ffff"})
-    	.done(function(){alertaColor('AZUL',1);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor1Fucsia(){
-    $.get(servidor_color1, {color:"8e149a"})
-    	.done(function(){alertaColor('FUCSIA',1);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor1Naranja(){
-    $.get(servidor_color1, {color:"f77331"})
-    	.done(function(){alertaColor('NARANJA',1);})
-    	.fail(function(){falloConexion();});
-}
 function ponColor1Rojo(){
     $.get(servidor_color1, {color:"ff0000"})
     	.done(function(){alertaColor('ROJO',1);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor1Verde(){
-    $.get(servidor_color1, {color:"40ff00"})
-    	.done(function(){alertaColor('VERDE',1);})
     	.fail(function(){falloConexion();});
 }
 function ponColor1Blanco(){
@@ -121,34 +108,9 @@ function ponColor1Negro(){
     	.done(function(){alertaColor('NEGRO',1);})
     	.fail(function(){falloConexion();});
 }
-function ponColor2Amarillo(){
-    $.get(servidor_color2, {color:"ffcc00"})
-    	.done(function(){alertaColor('AMARILLO',2);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor2Azul(){
-    $.get(servidor_color2, {color:"00ffff"})
-    	.done(function(){alertaColor('AZUL',2);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor2Fucsia(){
-    $.get(servidor_color2, {color:"8e149a"})
-    	.done(function(){alertaColor('FUCSIA',2);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor2Naranja(){
-    $.get(servidor_color2, {color:"f77331"})
-    	.done(function(){alertaColor('NARANJA',2);})
-    	.fail(function(){falloConexion();});
-}
 function ponColor2Rojo(){
     $.get(servidor_color2, {color:"ff0000"})
     	.done(function(){alertaColor('ROJO',2);})
-    	.fail(function(){falloConexion();});
-}
-function ponColor2Verde(){
-    $.get(servidor_color2, {color:"40ff00"})
-    	.done(function(){alertaColor('VERDE',2);})
     	.fail(function(){falloConexion();});
 }
 function ponColor2Blanco(){
@@ -169,11 +131,11 @@ function intermitenciaNula(){
     	.fail(function(){falloConexion();});
 }
 
-function intermitenciaBaja(){
-    $.get(servidor_intermitencia, {intermitencia:"1"})
-    	.done(function(){alertaComando("BAJA","INTERMITENCIA");})
-    	.fail(function(){falloConexion();});
-}
+//function intermitenciaBaja(){
+//    $.get(servidor_intermitencia, {intermitencia:"1"})
+//    	.done(function(){alertaComando("BAJA","INTERMITENCIA");})
+//    	.fail(function(){falloConexion();});
+//}
 
 function intermitenciaAlta(){
     $.get(servidor_intermitencia, {intermitencia:"2"})
@@ -204,7 +166,7 @@ function activaShow(){
 }
 function activaShowEmpezado(){
     $.get(servidor_activa_showempezado)
-    	.done(function(){alertaComando("xa non hai marcha atrás...","SHOW");})
+    	.done(function(){})
     	.fail(function(){falloConexion();});
 }
 function desactivaShowEmpezado(){
@@ -238,174 +200,233 @@ function desactivaShow(){
 }
 
 //LOTO
-function activaLoto(){
-    $.get(servidor_activa_loto)
-    	.done(function(){alertaComando("ACTIVADA","LOTO");})
-    	.fail(function(){falloConexion();});
-    desactivaLotosetTimeout = setTimeout(desactivaLoto,300000);
-}
-function desactivaLoto(){
-    $.get(servidor_desact_loto)
-    	.done(function(){alertaComando("DESACTIVADA","LOTO");})
-    	.fail(function(){falloConexion();});
-	if (desactivaLotosetTimeout !== null) {
-        clearTimeout(desactivaLotosetTimeout);
-        desactivaLotosetTimeout = null;
-    }
-}
+//function activaLoto(){
+//    $.get(servidor_activa_loto)
+//    	.done(function(){alertaComando("ACTIVADA","LOTO");})
+//    	.fail(function(){falloConexion();});
+//    desactivaLotosetTimeout = setTimeout(desactivaLoto,300000);
+//}
+//function desactivaLoto(){
+//    $.get(servidor_desact_loto)
+//    	.done(function(){alertaComando("DESACTIVADA","LOTO");})
+//    	.fail(function(){falloConexion();});
+//	if (desactivaLotosetTimeout !== null) {
+//        clearTimeout(desactivaLotosetTimeout);
+//        desactivaLotosetTimeout = null;
+//    }
+//}
 
-//function activaPedo(){
-//    $.get(servidor_activa_pedo);
-//    setTimeout(desactivaPedo,15000);
-//}
-//function desactivaPedo(){
-//    $.get(servidor_desact_pedo);
-//}
+function activaGuapo(){
+    $.get(servidor_activa_guapo)
+    .done(function(){
+        alertaComando("ACTIVADO","GUAPO");
+        desactivaGuaposetTimeout = setTimeout(desactivaGuapo,120000);
+	})
+    .fail(function(){falloConexion();});
+}
+function desactivaGuapo(){
+    $.get(servidor_desactiva_guapo)
+    .done(function(){
+        if (desactivaGuaposetTimeout !== null) {
+        	clearTimeout(desactivaGuaposetTimeout);
+        	desactivaGuaposetTimeout = null;
+    	}
+        alertaComando("DESACTIVADO","GUAPO");
+    })
+    .fail(function(){falloConexion();});
+}
 
 function activaAplauso(){
     $.get(servidor_activa_aplauso)
-    	.done(function(){alertaComando("ACTIVADO","APLAUSO");})
-    	.fail(function(){falloConexion();});
-    desactivaAplausosetTimeout = setTimeout(desactivaAplauso,60000);
+    .done(function(){
+        alertaComando("ACTIVADO","APLAUSO");
+        desactivaAplausosetTimeout = setTimeout(desactivaAplauso,120000);
+	})
+    .fail(function(){falloConexion();});
 }
 function desactivaAplauso(){
-    $.get(servidor_desact_aplauso)
-    	.done(function(){alertaComando("DESACTIVADO","APLAUSO");  })
-    	.fail(function(){falloConexion();  });
-	if (desactivaAplausosetTimeout !== null) {
-        clearTimeout(desactivaAplausosetTimeout);
-        desactivaAplausosetTimeout = null;
-    }
+    $.get(servidor_desactiva_aplauso)
+    .done(function(){
+        if (desactivaAplausosetTimeout !== null) {
+        	clearTimeout(desactivaAplausosetTimeout);
+        	desactivaAplausosetTimeout = null;
+    	}
+        alertaComando("DESACTIVADO","APLAUSO");
+    })
+    .fail(function(){falloConexion();});
 }
 
+function activaPedo(){
+    $.get(servidor_activa_pedo)
+    .done(function(){
+        alertaComando("ACTIVADO","PEDO");
+        desactivaPedosetTimeout = setTimeout(desactivaPedo,120000);
+	})
+    .fail(function(){falloConexion();});
+}
+function desactivaPedo(){
+    $.get(servidor_desactiva_pedo)
+    .done(function(){
+        if (desactivaPedosetTimeout !== null) {
+        	clearTimeout(desactivaPedosetTimeout);
+        	desactivaPedosetTimeout = null;
+    	}
+        alertaComando("DESACTIVADO","PEDO");
+    })
+    .fail(function(){falloConexion();});
+}
+
+function activaSelfie1(){
+    $.get(servidor_activa_selfie1)
+    .done(function(){alertaComando("ACTIVADO","SELFIE1");})
+    .fail(function(){falloConexion();});
+}
+function desactivaSelfie1(){
+    $.get(servidor_desactiva_selfie1)
+    .done(function(){alertaComando("DESACTIVADO","SELFIE1");})
+    .fail(function(){falloConexion();});
+}
+
+function activaSelfie2(){
+    $.get(servidor_activa_selfie2)
+    .done(function(){alertaComando("ACTIVADO","SELFIE2");})
+    .fail(function(){falloConexion();});
+}
+function desactivaSelfie2(){
+    $.get(servidor_desactiva_selfie2)
+    .done(function(){alertaComando("DESACTIVADO","SELFIE2");})
+    .fail(function(){falloConexion();});
+}
+
+
 //ADMIN
-function actualizaTGlobal(){
-	var form = $("#ft_global");   
-    var tiempo = $("#t_global", form).val();
-    tiempo = tiempo + '000';
-    var col = 'startConsultaServidorsetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Global: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function defectoTGlobal(){
-    var tiempo = 10000;
-    var col = 'startConsultaServidorsetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Global: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function actualizaTSelfie(){
-    var form = $("#ft_global");   
-    var tiempo = $("#t_global", form).val();
-    tiempo = tiempo + '000';    
-    var col = 'startSelfiesetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Selfie: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function defectoTSelfie(){
-    var tiempo = 20000;
-    var col = 'startSelfiesetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Selfie: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function actualizaTLoto(){
-    var form = $("#ft_global");   
-    var tiempo = $("#t_global", form).val();
-    tiempo = tiempo + '000';
-    var col = 'startLotosetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function defectoTLoto(){
-    var tiempo = 20000;
-    var col = 'startLotosetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function actualizaTColorines(){
-    var form = $("#ft_global");   
-    var tiempo = $("#t_global", form).val();
-    tiempo = tiempo + '000';
-    var col = 'startColorinessetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Colorines: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function defectoTColorines(){
-    var tiempo = 20000;
-    var col = 'startColorinessetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Colorines: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function actualizaTIntermitencia(){
-    var form = $("#ft_global");   
-    var tiempo = $("#t_global", form).val();
-    var col = 'startIntermitenciasetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Intermitencia: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
-function defectoTIntermitencia(){
-    var tiempo = 200;
-    var col = 'startIntermitenciasetTimeout';
-    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
-    	.done(function(){
-            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
-        })
-    	.fail(function(){
-            falloConexion();
-        });
-}
+//function actualizaTGlobal(){
+//	var form = $("#ft_global");   
+//    var tiempo = $("#t_global", form).val();
+//    tiempo = tiempo + '000';
+//    var col = 'startConsultaServidorsetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Global: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function defectoTGlobal(){
+//    var tiempo = 10000;
+//    var col = 'startConsultaServidorsetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Global: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function actualizaTSelfie(){
+//    var form = $("#ft_global");   
+//    var tiempo = $("#t_global", form).val();
+//    tiempo = tiempo + '000';    
+//    var col = 'startSelfiesetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Selfie: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function defectoTSelfie(){
+//    var tiempo = 20000;
+//    var col = 'startSelfiesetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Selfie: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function actualizaTLoto(){
+//    var form = $("#ft_global");   
+//    var tiempo = $("#t_global", form).val();
+//    tiempo = tiempo + '000';
+//    var col = 'startLotosetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function defectoTLoto(){
+//    var tiempo = 20000;
+//    var col = 'startLotosetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function actualizaTColorines(){
+//    var form = $("#ft_global");   
+//    var tiempo = $("#t_global", form).val();
+//    tiempo = tiempo + '000';
+//    var col = 'startColorinessetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Colorines: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function defectoTColorines(){
+//    var tiempo = 20000;
+//    var col = 'startColorinessetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Colorines: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function actualizaTIntermitencia(){
+//    var form = $("#ft_global");   
+//    var tiempo = $("#t_global", form).val();
+//    var col = 'startIntermitenciasetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Intermitencia: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
+//function defectoTIntermitencia(){
+//    var tiempo = 200;
+//    var col = 'startIntermitenciasetTimeout';
+//    $.get(servidor_actualiza_tiempo, {columna:col,valor:tiempo})
+//    	.done(function(){
+//            alertaComando("T. Loto: "+tiempo,"TEMPORIZADOR");
+//        })
+//    	.fail(function(){
+//            falloConexion();
+//        });
+//}
 function activaAlertas(){
     $.get(servidor_activa_alertas)
-    	.done(function(){alertaComando("ACTIVADA","ALERTAS");})
+    	.done(function(){alertaComando("ACTIVADAS","ALERTAS");})
     	.fail(function(){falloConexion();});
 }
 function desactivaAlertas(){
-    $.get(servidor_desact_alertas)
-    	.done(function(){alertaComando("DESACTIVADO","ALERTAS");  })
+    $.get(servidor_desactiva_alertas)
+    	.done(function(){alertaComando("DESACTIVADAS","ALERTAS");  })
     	.fail(function(){falloConexion();});    
 }
 
@@ -456,21 +477,22 @@ function uploadPhoto(mediaFile) {
 }
 
 function uploadSuccess(r) {
-    console.log("Code = " + r.responseCode);
-    console.log("Response = " + r.response);
-    console.log("Sent = " + r.bytesSent);
+    //console.log("Code = " + r.responseCode);
+    //console.log("Response = " + r.response);
+    //console.log("Sent = " + r.bytesSent);
     rutasubida = document.getElementById("rutasubida");
 	//rutasubida.innerHTML = '<p>foto subida OK!<br/>' + r.responseCode + '<br/>' + r.response + '<br/>' + r.bytesSent + '</p>'
-	rutasubida.innerHTML = '<p>FOTO SUBIDA OK!</p>';
     //comprimimos foto subida
     $.get(servidor_thumb, {imagen:nombreFoto});
+    //acabamos
+	rutasubida.innerHTML = '<p>FOTO SUBIDA OK!</p>';
 }
 
 function uploadError(error) {
     //alert("Saca outra foto. Houbo un erro: Code = " + error.code + ", source = " + error.source + ", target = " + error.target);
     navigator.notification.alert("Saca a foto de novo. Houbo un erro",function(){}, "ERRO NA SUBIDA", "OK");
-    console.log("upload error source " + error.source);
-    console.log("upload error target " + error.target);
+    //console.log("upload error source " + error.source);
+    //console.log("upload error target " + error.target);
 }
 
 //nombre de imagen aleatorio
@@ -496,7 +518,10 @@ function exitAppPopup() {
     );  
     return false;
 }
-    
+
+function irSelfie(){
+    location.href='control.html#tabstrip-selfie';
+}    
 function atrasApp(){
-	    location.href='control.html#tabstrip-fogar';
+	location.href='control.html#tabstrip-fogar';
 }
