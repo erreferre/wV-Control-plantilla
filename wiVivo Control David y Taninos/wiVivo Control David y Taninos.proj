@@ -13,13 +13,13 @@
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
-    <BundleVersion>10.0</BundleVersion>
+    <BundleVersion>11.0</BundleVersion>
     <DisplayName>wiVivo Control DT</DisplayName>
     <Author>aerowi</Author>
     <Description>wiVivo Control DT</Description>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode />
-    <AndroidVersionCode>1</AndroidVersionCode>
+    <AndroidVersionCode>11</AndroidVersionCode>
     <WP8Requirements />
     <WP8Capabilities />
     <WP8TileTitle />
