@@ -11,8 +11,8 @@ var webservice_wivivo = servidor_wivivo + '/liveshowsync/';
 var servidor_color1 = webservice_wivivo + 'actualiza_color1.php';
 var servidor_color2 = webservice_wivivo + 'actualiza_color2.php';
 var servidor_intermitencia = webservice_wivivo + 'actualiza_intermitencia.php';
-//var servidor_activa_loto = webservice_wivivo + 'activa_loto.php';
-//var servidor_desactiva_loto = webservice_wivivo + 'desactiva_loto.php';
+var servidor_activa_loto = webservice_wivivo + 'activa_loto.php';
+var servidor_desactiva_loto = webservice_wivivo + 'desactiva_loto.php';
 var servidor_activa_guapo = webservice_wivivo + 'activa_guapo.php';
 var servidor_desactiva_guapo = webservice_wivivo + 'desactiva_guapo.php';
 var servidor_activa_pedo = webservice_wivivo + 'activa_pedo.php';
@@ -40,7 +40,7 @@ var nombreFoto = null;
 
 //temporizadores
 var activaShowEmpezadosetTimeout = null;
-//var desactivaLotosetTimeout = null;
+var desactivaLotosetTimeout = null;
 var desactivaGuaposetTimeout = null;
 var desactivaAplausosetTimeout = null;
 var desactivaPedosetTimeout = null;
@@ -67,9 +67,11 @@ function leeConfiguracion() {
 function alertaColor(color,i){
     navigator.notification.alert(color,function(){},"COLOR"+i,"OK");
 }
+
 function alertaComando(mensaje,titulo){
     navigator.notification.alert(mensaje,function(){},titulo,"OK");
 }
+
 function falloConexion(){
 	navigator.notification.alert("Proba de novo, non dei executado a acción",function(){},"ERRO DE COMUNICACION","OK");    
 }
@@ -98,26 +100,31 @@ function ponColor1Rojo(){
     	.done(function(){alertaColor('ROJO',1);})
     	.fail(function(){falloConexion();});
 }
+
 function ponColor1Blanco(){
     $.get(servidor_color1, {color:"ffffff"})
     	.done(function(){alertaColor('BLANCO',1);})
     	.fail(function(){falloConexion();});
 }
+
 function ponColor1Negro(){
     $.get(servidor_color1, {color:"000000"})
     	.done(function(){alertaColor('NEGRO',1);})
     	.fail(function(){falloConexion();});
 }
+
 function ponColor2Rojo(){
     $.get(servidor_color2, {color:"ff0000"})
     	.done(function(){alertaColor('ROJO',2);})
     	.fail(function(){falloConexion();});
 }
+
 function ponColor2Blanco(){
     $.get(servidor_color2, {color:"ffffff"})
     	.done(function(){alertaColor('BLANCO',2);})
     	.fail(function(){falloConexion();});
 }
+
 function ponColor2Negro(){
     $.get(servidor_color2, {color:"000000"})
     	.done(function(){alertaColor('NEGRO',2);})
@@ -131,15 +138,22 @@ function intermitenciaNula(){
     	.fail(function(){falloConexion();});
 }
 
-//function intermitenciaBaja(){
-//    $.get(servidor_intermitencia, {intermitencia:"1"})
-//    	.done(function(){alertaComando("BAJA","INTERMITENCIA");})
-//    	.fail(function(){falloConexion();});
-//}
+function intermitenciaBaja(){
+    $.get(servidor_intermitencia, {intermitencia:"1"})
+    	.done(function(){alertaComando("BAJA","INTERMITENCIA");})
+    	.fail(function(){falloConexion();});
+}
 
 function intermitenciaAlta(){
     $.get(servidor_intermitencia, {intermitencia:"2"})
     	.done(function(){alertaComando("ALTA","INTERMITENCIA");})
+    	.fail(function(){falloConexion();});
+}
+
+//BENGALA
+function activaBengala(){
+    $.get(servidor_intermitencia, {intermitencia:"3"})
+    	.done(function(){alertaComando("ACTIVADA","BENGALA");})
     	.fail(function(){falloConexion();});
 }
 
@@ -162,11 +176,13 @@ function activaShow(){
     );  
     return false;
 }
+
 function activaShowEmpezado(){
     $.get(servidor_activa_showempezado)
     	.done(function(){})
     	.fail(function(){falloConexion();});
 }
+
 function desactivaShowEmpezado(){
     $.get(servidor_desactiva_showempezado)
     	.done(function(){})
@@ -176,6 +192,7 @@ function desactivaShowEmpezado(){
         activaShowEmpezadosetTimeout = null;
     }
 }
+
 function desactivaShow(){
     navigator.notification.confirm(
         'se premes SI, PARARÁS TODO!'
@@ -196,21 +213,21 @@ function desactivaShow(){
 }
 
 //LOTO
-//function activaLoto(){
-//    $.get(servidor_activa_loto)
-//    	.done(function(){alertaComando("ACTIVADA","LOTO");})
-//    	.fail(function(){falloConexion();});
-//    desactivaLotosetTimeout = setTimeout(desactivaLoto,300000);
-//}
-//function desactivaLoto(){
-//    $.get(servidor_desact_loto)
-//    	.done(function(){alertaComando("DESACTIVADA","LOTO");})
-//    	.fail(function(){falloConexion();});
-//	if (desactivaLotosetTimeout !== null) {
-//        clearTimeout(desactivaLotosetTimeout);
-//        desactivaLotosetTimeout = null;
-//    }
-//}
+function activaLoto(){
+    $.get(servidor_activa_loto)
+  	.done(function(){alertaComando("ACTIVADA","LOTO");})
+  	.fail(function(){falloConexion();});
+    desactivaLotosetTimeout = setTimeout(desactivaLoto,300000);
+}
+function desactivaLoto(){
+    $.get(servidor_desact_loto)
+  	.done(function(){alertaComando("DESACTIVADA","LOTO");})
+  	.fail(function(){falloConexion();});
+	if (desactivaLotosetTimeout !== null) {
+        clearTimeout(desactivaLotosetTimeout);
+        desactivaLotosetTimeout = null;
+    }
+}
 
 function activaGuapo(){
     $.get(servidor_activa_guapo)
@@ -220,6 +237,7 @@ function activaGuapo(){
 	})
     .fail(function(){falloConexion();});
 }
+
 function desactivaGuapo(){
     $.get(servidor_desactiva_guapo)
     .done(function(){
@@ -240,6 +258,7 @@ function activaAplauso(){
 	})
     .fail(function(){falloConexion();});
 }
+
 function desactivaAplauso(){
     $.get(servidor_desactiva_aplauso)
     .done(function(){
@@ -260,6 +279,7 @@ function activaPedo(){
 	})
     .fail(function(){falloConexion();});
 }
+
 function desactivaPedo(){
     $.get(servidor_desactiva_pedo)
     .done(function(){
@@ -277,6 +297,7 @@ function activaSelfie1(){
     .done(function(){alertaComando("ACTIVADO","SELFIE1");})
     .fail(function(){falloConexion();});
 }
+
 function desactivaSelfie1(){
     $.get(servidor_desactiva_selfie1)
     .done(function(){alertaComando("DESACTIVADO","SELFIE1");})
@@ -288,12 +309,12 @@ function activaSelfie2(){
     .done(function(){alertaComando("ACTIVADO","SELFIE2");})
     .fail(function(){falloConexion();});
 }
+
 function desactivaSelfie2(){
     $.get(servidor_desactiva_selfie2)
     .done(function(){alertaComando("DESACTIVADO","SELFIE2");})
     .fail(function(){falloConexion();});
 }
-
 
 //ADMIN
 //function actualizaTGlobal(){
@@ -417,19 +438,18 @@ function desactivaSelfie2(){
 //}
 function activaAlertas(){
     $.get(servidor_activa_alertas)
-    	.done(function(){alertaComando("ACTIVADAS","ALERTAS");})
-    	.fail(function(){falloConexion();});
-}
-function desactivaAlertas(){
-    $.get(servidor_desactiva_alertas)
-    	.done(function(){alertaComando("DESACTIVADAS","ALERTAS");})
-    	.fail(function(){falloConexion();});    
+   	.done(function(){alertaComando("ACTIVADAS","ALERTAS");})
+   	.fail(function(){falloConexion();});
 }
 
+function desactivaAlertas(){
+    $.get(servidor_desactiva_alertas)
+   	.done(function(){alertaComando("DESACTIVADAS","ALERTAS");})
+   	.fail(function(){falloConexion();});    
+}
 
 //Fotos con "capture"
 function captureImage() {
-    // Launch device camera application, 
     navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 }
 
@@ -451,7 +471,6 @@ function captureSuccess(mediaFiles) {
 // Called if something bad happens.
 function captureError(error) {
     navigator.notification.alert("Volve a saca-la foto", function(){},"ERRO EN CAPTURA", "OK");
-    //navigator.notification.alert(msg, null, 'Uh oh!');
 }
 
 //SUBE FOTO
@@ -473,10 +492,6 @@ function uploadPhoto(mediaFile) {
 }
 
 function uploadSuccess(r) {
-    //console.log("Code = " + r.responseCode);
-    //console.log("Response = " + r.response);
-    //console.log("Sent = " + r.bytesSent);
-	//rutasubida.innerHTML = '<p>foto subida OK!<br/>' + r.responseCode + '<br/>' + r.response + '<br/>' + r.bytesSent + '</p>'
     //comprimimos foto subida
     $.get(servidor_thumb, {imagen:nombreFoto})
     .done(function(){
@@ -489,10 +504,7 @@ function uploadSuccess(r) {
 }
 
 function uploadError(error) {
-    //alert("Saca outra foto. Houbo un erro: Code = " + error.code + ", source = " + error.source + ", target = " + error.target);
     navigator.notification.alert("Saca a foto de novo. Houbo un erro",function(){}, "ERRO NA SUBIDA", "OK");
-    //console.log("upload error source " + error.source);
-    //console.log("upload error target " + error.target);
 }
 
 //nombre de imagen aleatorio
@@ -522,6 +534,7 @@ function exitAppPopup() {
 function irSelfie(){
     location.href='control.html#tabstrip-selfie';
 }    
+
 function atrasApp(){
 	location.href='control.html#tabstrip-fogar';
 }
